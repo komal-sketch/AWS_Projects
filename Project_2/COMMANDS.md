@@ -29,7 +29,6 @@ A practical, copy‑paste‑friendly README for setting up and managing AWS VPCs
 
 > ✅ Use **`terraform`** commands to manage your AWS infrastructure with Terraform.
 
-```bash
 # Initialize the Terraform working directory
 terraform init
 
@@ -63,128 +62,122 @@ terraform import aws_vpc.vpc_a vpc-12345678
 # Update Terraform provider and modules
 terraform get -update
 
-Initialize Terraform
 
-Before running any Terraform commands, you must initialize the working directory containing Terraform configuration files. This step will download the necessary provider plugins and initialize your working environment.
+## Initialize Terraform
 
+# Before running any Terraform commands, you must initialize the working directory containing Terraform configuration files. 
+# This step will download the necessary provider plugins and initialize your working environment.
 terraform init
 
-Verify the Terraform Plan
 
-Before applying changes, it's a good practice to review the execution plan. This will show you what resources will be created, modified, or destroyed.
+## Verify the Terraform Plan
 
+# Before applying changes, it's a good practice to review the execution plan. 
+# This will show you what resources will be created, modified, or destroyed.
 terraform plan
 
-Apply the Terraform Configuration
 
-Once you are satisfied with the plan, apply the configuration to create the infrastructure on AWS.
+## Apply the Terraform Configuration
 
+# Once you are satisfied with the plan, apply the configuration to create the infrastructure on AWS.
 terraform apply
 
-
-To skip the confirmation prompt, use:
-
+# To skip the confirmation prompt, use:
 terraform apply -auto-approve
 
-Check the Infrastructure State
 
-You can check the current state of your Terraform-managed infrastructure using:
+## Check the Infrastructure State
 
+# You can check the current state of your Terraform-managed infrastructure using:
 terraform show
 
-Destroy the Infrastructure
 
-If you want to delete all the resources created by Terraform, use the terraform destroy command. This is useful when you want to clean up your environment or stop incurring costs on AWS resources.
+## Destroy the Infrastructure
 
+# If you want to delete all the resources created by Terraform, use the terraform destroy command. 
+# This is useful when you want to clean up your environment or stop incurring costs on AWS resources.
 terraform destroy
 
-
-To skip the confirmation prompt, use:
-
+# To skip the confirmation prompt, use:
 terraform destroy -auto-approve
 
-Terraform Output
 
-To display the outputs from your Terraform configuration, such as the public IP of an EC2 instance, use:
+## Terraform Output
 
+# To display the outputs from your Terraform configuration, such as the public IP of an EC2 instance, use:
 terraform output
 
-Validate Terraform Configuration
 
-To check the syntax and correctness of your configuration files, use:
+## Validate Terraform Configuration
 
+# To check the syntax and correctness of your configuration files, use:
 terraform validate
 
-Plan for a Specific Target
 
-If you only want to apply or plan for specific resources, you can target them with the -target flag:
+## Plan for a Specific Target
 
+# If you only want to apply or plan for specific resources, you can target them with the -target flag:
 terraform plan -target=aws_vpc.vpc_a
 
-Refresh Terraform State
 
-If you want to refresh the state of the resources (i.e., sync the state file with the actual resources), use:
+## Refresh Terraform State
 
+# If you want to refresh the state of the resources (i.e., sync the state file with the actual resources), use:
 terraform refresh
 
-Check Terraform Providers
 
-To check which providers are being used in your Terraform project, use:
+## Check Terraform Providers
 
+# To check which providers are being used in your Terraform project, use:
 terraform providers
 
-List All Terraform Resources
 
-To see all resources managed by Terraform, use:
+## List All Terraform Resources
 
+# To see all resources managed by Terraform, use:
 terraform state list
 
-Import Existing Resources into Terraform
 
-If you have already created resources manually and want to bring them under Terraform management, you can import them using:
+## Import Existing Resources into Terraform
 
+# If you have already created resources manually and want to bring them under Terraform management, you can import them using:
 terraform import aws_vpc.vpc_a vpc-12345678
 
-Update Terraform Provider or Modules
 
-If you want to update the Terraform provider or any modules used in your project, you can run:
+## Update Terraform Provider or Modules
 
+# If you want to update the Terraform provider or any modules used in your project, you can run:
 terraform get -update
 
-Accessing Private Subnet from Public Subnet in the Same VPC
-Options:
 
-Using Bastion Host:
+## Accessing Private Subnet from Public Subnet in the Same VPC
 
-Launch EC2 in the public subnet.
+### Options:
 
-SSH to the bastion host using public IP:
+#### **Using Bastion Host**:
 
+# Launch EC2 in the public subnet.
 ssh -i mykey.pem ec2-user@<bastion-public-ip>
 
-
-From bastion host, SSH into the private subnet EC2 using private IP:
-
+# From bastion host, SSH into the private subnet EC2 using private IP:
 ssh -i mykey.pem ec2-user@10.0.2.10  # Private IP
 
 
-Using AWS Systems Manager (SSM):
+#### **Using AWS Systems Manager (SSM)**:
 
-If EC2 has SSM Agent installed and IAM role attached:
-
+# If EC2 has SSM Agent installed and IAM role attached:
 aws ssm start-session --target <private-instance-id>
 
 
-Using NAT Gateway:
+#### **Using NAT Gateway**:
 
-If the private subnet needs internet access, deploy a NAT Gateway in the public subnet and update the route tables for the private subnet to route through the NAT Gateway.
+# If the private subnet needs internet access, deploy a NAT Gateway in the public subnet and update the route tables for the private subnet to route through the NAT Gateway.
 
-Best Practices for Terraform and AWS:
 
-Always use IAM roles for EC2 instances and other resources instead of hardcoded credentials.
+## Best Practices for Terraform and AWS:
 
-Use variables and output files to make your Terraform code reusable and modular.
+# Always use IAM roles for EC2 instances and other resources instead of hardcoded credentials.
+# Use variables and output files to make your Terraform code reusable and modular.
+# Use state backends like S3 to store Terraform state in a centralized and secure way.
+# Ensure that security groups follow the principle of least privilege—only allow traffic that is absolutely necessary.
 
-Use state backends like S3 to store Terraform state in a centralized and secure way.
-
-Ensure that security groups follow the principle of least privilege—only allow traffic that is absolutely necessary.
