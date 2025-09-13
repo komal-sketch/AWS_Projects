@@ -1,4 +1,4 @@
-                                      AWS API Gateway + Lambda Integration Project
+                                       AWS API Gateway + Lambda Integration Project
 
 This project demonstrates the integration of AWS API Gateway with AWS Lambda, providing a serverless architecture for building and testing RESTful APIs. The API endpoints are designed to trigger Lambda functions, enabling dynamic execution of backend logic without provisioning or managing servers.
 
